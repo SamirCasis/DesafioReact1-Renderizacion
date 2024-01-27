@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import Lista from './components/Lista';
+import Formulario from './components/Formulario';
+import Alerta from './components/Alerta';
+import Buscador from './components/Buscador';
+import BaseColaboradores from './assets/baseColaboradores';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [data, setData] = useState(BaseColaboradores);
+  const [dataFilter, setDataFilter] = useState(data);
+  const [error, setError] = useState({
+    error: false,
+    msg: '',
+    color: ''
+  });
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header className='encabezado'>
+        <h1>Lista de colaboradores</h1>
+        <Buscador data={data} dataFilter={setDataFilter} />
+      </header>
+      <main className='principal'>
+        <Lista
+          data={data}
+          setData={setData}
+          dataFilter={dataFilter}
+          setDataFilter={setDataFilter}
+        />
+        <Formulario error={error} setError={setError} setData={setData} setDataFilter={setDataFilter} />
+        <Alerta error={error} />
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
