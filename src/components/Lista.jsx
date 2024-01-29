@@ -1,5 +1,6 @@
-import React from 'react';
 import Table from 'react-bootstrap/Table';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const Lista = ({ data, dataFilter, setData, setDataFilter }) => {
     const deleteUsuario = (id) => {
@@ -8,7 +9,7 @@ const Lista = ({ data, dataFilter, setData, setDataFilter }) => {
         setDataFilter(newData);
     };
     const usuarios = dataFilter.map(usuario => (
-        <tr className='align-middle' key={usuario.id}>
+        <tr className='align-middle col-4' key={usuario.id}>
             <td>{usuario.nombre}</td>
             <td>{usuario.correo}</td>
             <td>{usuario.edad}</td>
@@ -19,7 +20,7 @@ const Lista = ({ data, dataFilter, setData, setDataFilter }) => {
                     className='btn btn-danger'
                     onClick={() => deleteUsuario(usuario.id)}
                 >
-                    Eliminar
+                <FontAwesomeIcon icon={faTrash} />
                 </button>
             </td>
         </tr>
@@ -27,8 +28,8 @@ const Lista = ({ data, dataFilter, setData, setDataFilter }) => {
 
     return (
         <Table 
-        variant='success' 
-        className='table table-striped'>
+        variant='secondary' 
+        className='table-responsive table-striped col-8 col-lg-8'>
             <thead>
                 <tr>
                     <th>Nombre</th>

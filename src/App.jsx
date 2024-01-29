@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Lista from './components/Lista';
 import Formulario from './components/Formulario';
 import Alerta from './components/Alerta';
@@ -19,15 +20,18 @@ function App() {
     <>
       <header className='encabezado'>
         <h1>Lista de colaboradores</h1>
-        <Buscador data={data} dataFilter={setDataFilter} />
       </header>
+      <article className='d-grid gap-2'>
+        <Buscador data={data} dataFilter={setDataFilter} />
+      </article>
       <main className='principal'>
-        <Lista
+        <Lista className='lista'
           data={data} setData={setData} dataFilter={dataFilter} setDataFilter={setDataFilter}
         />
-        <section className='formulario'> <Formulario error={error} setError={setError} setData={setData} setDataFilter={setDataFilter}
-        />
-          <Alerta error={error} /></section>
+        <section className='formulario'>
+          <Formulario error={error} setError={setError} setData={setData} setDataFilter={setDataFilter} />
+          <Alerta error={error} />
+        </section>
       </main>
     </>
   );
