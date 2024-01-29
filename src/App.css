@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 }
+
+.encabezado {
+  background-color: rgb(195, 231, 231);
+  padding: 20px;
+}
+
+.principal {
+  display: flex;
+  margin-top: 30px;
+  min-height:max-content;
+}
+
+.formulario {
+  background-color: coral;
+}

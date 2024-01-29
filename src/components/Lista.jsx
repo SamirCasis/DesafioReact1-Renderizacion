@@ -26,7 +26,9 @@ const Lista = ({ data, dataFilter, setData, setDataFilter }) => {
     ));
 
     return (
-        <Table striped bordered hover>
+        <Table 
+        variant='success' 
+        className='table table-striped'>
             <thead>
                 <tr>
                     <th>Nombre</th>

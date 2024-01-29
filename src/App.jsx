@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Lista from './components/Lista';
 import Formulario from './components/Formulario';
 import Alerta from './components/Alerta';
@@ -23,13 +23,11 @@ function App() {
       </header>
       <main className='principal'>
         <Lista
-          data={data}
-          setData={setData}
-          dataFilter={dataFilter}
-          setDataFilter={setDataFilter}
+          data={data} setData={setData} dataFilter={dataFilter} setDataFilter={setDataFilter}
         />
-        <Formulario error={error} setError={setError} setData={setData} setDataFilter={setDataFilter} />
-        <Alerta error={error} />
+        <section className='formulario'> <Formulario error={error} setError={setError} setData={setData} setDataFilter={setDataFilter}
+        />
+          <Alerta error={error} /></section>
       </main>
     </>
   );

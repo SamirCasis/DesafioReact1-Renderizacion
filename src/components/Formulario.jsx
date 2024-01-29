@@ -11,26 +11,42 @@ const Formulario = ({ setData, setError }) => {
         telefono: ''
     });
 
-    const validarDatos = (e) => {
-        e.preventDefault();
-
+    const agregarColaborador = () => {
         const { nombre, correo, edad, cargo, telefono } = formData;
-        const validacionDatos = !nombre || !correo || !edad || !cargo || !telefono;
 
-        if (validacionDatos) {
+        if (!nombre || !correo || !edad || !cargo || !telefono) {
             setError({
                 error: true,
-                msg: '¡Completa todos los campos!',
+                msg: 'Completa todos los campos!',
                 color: 'danger',
             });
-        } else {
-            setData(formData);
-            setError({
-                error: true,
-                msg: '¡Colaborador agregado exitosamente!',
-                color: 'success',
-            });
+            return;
         }
+
+        const nuevoColaborador = {
+            id: Math.floor(Math.random() * 1000),
+            nombre,
+            correo,
+            edad: parseInt(edad),
+            cargo,
+            telefono: parseInt(telefono)
+        };
+
+        setData(prevData => [...prevData, nuevoColaborador]);
+
+        setFormData({
+            nombre: '',
+            correo: '',
+            edad: '',
+            cargo: '',
+            telefono: ''
+        });
+
+        setError({
+            error: true,
+            msg: 'Colaborador agregado exitosamente!',
+            color: 'success',
+        });
     };
 
     const handleChange = (e) => {
@@ -38,62 +54,55 @@ const Formulario = ({ setData, setError }) => {
     };
 
     return (
-        <Form className="formulario mt-4" onSubmit={(e) => validarDatos(e)}>
-            <Form.Group className='mb-3'>
-                <input
+        <Form className="formulario mt-4">
+            <Form.Group controlId="formNombre">
+                <Form.Control
                     type='text'
                     name='nombre'
-                    className='form-control'
                     placeholder='Nombre'
                     onChange={handleChange}
                     value={formData.nombre}
                 />
             </Form.Group>
-            <Form.Group className='mb-3 mt-2'>
-                <input
+            <Form.Group controlId="formCorreo">
+                <Form.Control
                     type='email'
                     name='correo'
-                    className='form-control'
                     placeholder='Correo'
                     onChange={handleChange}
                     value={formData.correo}
                 />
             </Form.Group>
-            <Form.Group className='mb-3 mt-2'>
-                <input
+            <Form.Group controlId="formEdad">
+                <Form.Control
                     type='number'
                     name='edad'
-                    className='form-control'
                     placeholder='Edad'
                     onChange={handleChange}
-                    value={formData.edad || ''}
+                    value={formData.edad}
                 />
             </Form.Group>
-            <Form.Group className='mb-3 mt-2'>
-                <input
+            <Form.Group controlId="formCargo">
+                <Form.Control
                     type='text'
                     name='cargo'
-                    className='form-control'
                     placeholder='Cargo'
                     onChange={handleChange}
                     value={formData.cargo}
                 />
             </Form.Group>
-            <Form.Group className='mb-3 mt-2'>
-                <input
+            <Form.Group controlId="formTelefono">
+                <Form.Control
                     type='number'
                     name='telefono'
-                    className='form-control'
                     placeholder='Teléfono'
                     onChange={handleChange}
-                    value={formData.telefono || ''}
+                    value={formData.telefono}
                 />
             </Form.Group>
-            <Button variant="success" type="submit">
-                Ingresar Colaborador
-            </Button>
+            <Button variant="primary" onClick={agregarColaborador}>Agregar Colaborador</Button>
         </Form>
-    )
-}
+    );
+};
 
 export default Formulario;
